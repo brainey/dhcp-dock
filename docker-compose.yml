@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  dhcp-server:
+    image: prehley/rpi-dhcpd:latest # Or another suitable ARM-compatible ISC DHCP image
+    container_name: isc-dhcp-server
+    network_mode: host # Crucial for DHCP to broadcast on the host network
+    volumes:
+      - ./etc:/data
+    environment:
+      - IFACE=eth0 # Replace with your Raspberry Pi's network interface (e.g., wlan0)
+    restart: unless-stopped
